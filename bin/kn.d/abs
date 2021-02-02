@@ -1,13 +1,13 @@
 #!/usr/bin/perl
 use v5.10; use strict; use warnings;
 use File::Spec;
-$ARGV[0] =~ s,/?\.+/,/,g;
+$ARGV[0] =~ s,/?(\.+/|\.{2\,}),/,g;
 $ARGV[0] =~ s,^/+,,;
 say File::Spec->join($ENV{'KN'},$ARGV[0])
 
 __END__
 
-`s,/?\.+/,/,g` ensures path doesn't contain `..` to escape root $KN path.
+`s,/?(\.+/|\.{2\,}),/,g` ensures path doesn't contain `..` to escape root $KN path.
 
 `s,^/+,,` ensures `join` doesn't return path containing "//" in place of
 contact of two joined pathes.
